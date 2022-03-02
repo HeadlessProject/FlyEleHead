@@ -1,10 +1,13 @@
 using info = FlyElepHead.GlobalInfo;
 
+#pragma warning disable CS8602 // 解引用可能出现空引用。
+
 namespace FlyElepHead
 {
     public partial class MainWindow : Form
     {
         Dictionary<string, Panel> scenes = new();
+        Dictionary<string, Control> controllib = new();
 
         public MainWindow()
         {
@@ -22,7 +25,7 @@ namespace FlyElepHead
             InitPanel("StartPanel");
 
             scenes["StartPanel"].Parent = this;
-            
+
             InitPanel("GamePanel");
 
         }
@@ -71,6 +74,8 @@ namespace FlyElepHead
                         },
                         Parent = panel,
                     };
+                    controllib.Add("StartPanel_Label_Title", label);
+                    controllib.Add("StartPanel_Button_StartGame", button);
                     break;
                 case "GamePanel":
                     Panel game_panel =scenes[name];
@@ -81,3 +86,5 @@ namespace FlyElepHead
         }
     }
 }
+
+#pragma warning restore CS8602 // 解引用可能出现空引用。
