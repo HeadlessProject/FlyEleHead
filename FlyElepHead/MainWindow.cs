@@ -76,6 +76,9 @@ namespace FlyElepHead
                     Panel game_panel =scenes[name];
                     game_panel.Dock = DockStyle.Fill;
 
+
+
+
                     break;
             }
         }
