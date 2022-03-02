@@ -1,13 +1,14 @@
 using info = FlyElepHead.GlobalInfo;
 
+#pragma warning disable IDE0079 // 请删除不必要的忽略
 #pragma warning disable CS8602 // 解引用可能出现空引用。
 
 namespace FlyElepHead
 {
     public partial class MainWindow : Form
     {
-        Dictionary<string, Panel> scenes = new();
-        Dictionary<string, Control> controllib = new();
+        readonly Dictionary<string, Panel> scenes = new();
+        readonly Dictionary<string, Control> controllib = new();
 
         public MainWindow()
         {
@@ -43,7 +44,7 @@ namespace FlyElepHead
                 case "StartPanel":
                     Panel panel = scenes[name];
                     panel.Dock = DockStyle.Fill;
-                    Label label = new Label()
+                    Label label = new()
                     {
                         Text = info.start_panel_title,
                         Parent = panel,
@@ -59,7 +60,7 @@ namespace FlyElepHead
                         X = (Width - label.PreferredSize.Width) / 2,
                         Y = (Height - label.PreferredSize.Height) / 2 - info.menu_label_title_vertical_offset
                     };
-                    Button button = new Button()
+                    Button button = new()
                     {
                         Text = "开始游戏",
                         Size = new Size()
@@ -88,3 +89,4 @@ namespace FlyElepHead
 }
 
 #pragma warning restore CS8602 // 解引用可能出现空引用。
+#pragma warning restore IDE0079 // 请删除不必要的忽略
