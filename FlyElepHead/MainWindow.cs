@@ -23,7 +23,6 @@ namespace FlyElepHead
             InitForm();
 
             Panel start_panel = new();
-
             scenes.Add("StartPanel", start_panel);
             Panel game_panel = new();
             scenes.Add("GamePanel", game_panel);
