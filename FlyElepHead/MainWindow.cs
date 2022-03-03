@@ -11,16 +11,19 @@ namespace FlyElepHead
         readonly public Dictionary<string, Control> controllib = new();
 
         MainWindowHelper mwhelper;
+        EEGG eEGG;
 
         public MainWindow()
         {
             InitializeComponent();
 
             mwhelper = new(this);
+            eEGG = new(this);
 
             InitForm();
 
             Panel start_panel = new();
+
             scenes.Add("StartPanel", start_panel);
             Panel game_panel = new();
             scenes.Add("GamePanel", game_panel);
@@ -46,6 +49,11 @@ namespace FlyElepHead
         {
             MaximizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
+
+            eEGG.EEGGRegister("FUCKCCF", new Action(() =>
+            {
+
+            }));
         }
 
         /// <summary>
