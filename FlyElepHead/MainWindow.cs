@@ -101,6 +101,7 @@ namespace FlyElepHead
                             Height = info.menu_label_title_height
                         },
                         Font = new Font("Consolas", info.menu_label_title_fontsize),
+                        ForeColor = Color.FromArgb(),
                         BackColor = Color.Transparent
                     };
                     label.Location = new Point()
