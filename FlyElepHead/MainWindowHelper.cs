@@ -107,5 +107,54 @@ namespace FlyElepHead
             };
             ti.Start();
         }
+
+        /// <summary>
+        /// 滚动控件颜色
+        /// </summary>
+        /// <param name="control">目标控件</param>
+        /// <param name="interval">延时(ms)</param>
+        /// <param name="target">11-前后景 | 10-前景 | 01-后景</param>
+        /// <returns>计时器</returns>
+        public Timer ScrollColor(Control control, int interval, int target)
+        {
+            int[] rgb = new int[3] { 0, 0, 0 };
+            int index = 0;
+            Timer ti = new Timer()
+            {
+                Interval = interval
+            };
+            bool rgb_way = true;
+            ti.Tick += (_, _) =>
+            {
+                if (rgb[index] == 255)
+                {
+                    rgb_way = false;
+                    --rgb[index];
+                    if (index == 2) index = 0;
+                    else ++index;
+                }
+                else if(rgb[index] == 0)
+                {
+                    rgb_way = true;
+                    ++rgb[index];
+                }
+                else rgb[index] += rgb_way ? 1 : -1;
+                switch(target)
+                {
+                    case 11:
+                        control.ForeColor = Color.FromArgb(rgb[0], rgb[1], rgb[2]);
+                        control.BackColor = Color.FromArgb(rgb[0], rgb[1], rgb[2]);
+                        break;
+                    case 10:
+                        control.ForeColor = Color.FromArgb(rgb[0], rgb[1], rgb[2]);
+                        break;
+                    case 01:
+                        control.BackColor = Color.FromArgb(rgb[0], rgb[1], rgb[2]);
+                        break;
+                }
+            };
+            ti.Start();
+            return ti;
+        }
     }
 }

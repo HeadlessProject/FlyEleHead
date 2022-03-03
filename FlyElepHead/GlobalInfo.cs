@@ -24,6 +24,5 @@ namespace FlyElepHead
             "╚═╝     ╚══════╝╚═╝   ╚══════╝╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝ \n" +
             "";
         public const string game_panel_title = "test";
-        public string random_color=
     }
 }

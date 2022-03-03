@@ -1,4 +1,5 @@
 using info = FlyElepHead.GlobalInfo;
+using Timer = System.Windows.Forms.Timer;
 
 #pragma warning disable IDE0079 // 请删除不必要的忽略
 #pragma warning disable CS8602 // 解引用可能出现空引用。
@@ -9,6 +10,9 @@ namespace FlyElepHead
     {
         readonly public Dictionary<string, Panel> scenes = new();
         readonly public Dictionary<string, Control> controllib = new();
+
+        public delegate void PanelSwapped();
+        public event PanelSwapped OnPanelSwapped;
 
         PictureBox TransparentParent = new();
 
@@ -38,9 +42,8 @@ namespace FlyElepHead
             (controllib["StartPanel_Button_StartGame"] as Button).Click += (_, _) =>
             {
                 mwhelper.FadeOutIn("StartPanel", "GamePanel");
-
+                OnPanelSwapped.Invoke();
                 InitPanel("GamePanel");
-                
             };
         }
 
@@ -101,7 +104,7 @@ namespace FlyElepHead
                             Height = info.menu_label_title_height
                         },
                         Font = new Font("Consolas", info.menu_label_title_fontsize),
-                        ForeColor = Color.FromArgb(),
+                        ForeColor = Color.FromArgb(0, 0, 0),
                         BackColor = Color.Transparent
                     };
                     label.Location = new Point()
@@ -109,9 +112,15 @@ namespace FlyElepHead
                         X = (Width - label.PreferredSize.Width) / 2,
                         Y = (Height - label.PreferredSize.Height) / 2 - info.menu_label_title_vertical_offset
                     };
+
+                    Timer ti = mwhelper.ScrollColor(label, 1, 10);
+                    OnPanelSwapped += () =>
+                    {
+                        ti.Stop();
+                    };
+
                     controllib.Add("StartPanel_Label_Title", label);
                     controllib.Add("StartPanel_Button_StartGame", button);
-
                     break;
                 case "GamePanel":
                     Panel game_panel =scenes[name];
