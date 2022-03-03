@@ -7,12 +7,16 @@ namespace FlyElepHead
 {
     public partial class MainWindow : Form
     {
-        readonly Dictionary<string, Panel> scenes = new();
-        readonly Dictionary<string, Control> controllib = new(); 
+        readonly public Dictionary<string, Panel> scenes = new();
+        readonly public Dictionary<string, Control> controllib = new();
+
+        MainWindowHelper mwhelper;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            mwhelper = new(this);
 
             InitForm();
 
@@ -29,21 +33,25 @@ namespace FlyElepHead
 
             (controllib["StartPanel_Button_StartGame"] as Button).Click += (_, _) =>
             {
-                scenes["StartPanel"].Parent = null;
-
-                scenes["GamePanel"].Parent = this;
+                mwhelper.FadeOutIn("StartPanel", "GamePanel");
 
                 InitPanel("GamePanel");
             };
-
         }
 
+        /// <summary>
+        /// 初始化窗口
+        /// </summary>
         private void InitForm()
         {
             MaximizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
+        /// <summary>
+        /// 初始化界面
+        /// </summary>
+        /// <param name="name">界面名称</param>
         private void InitPanel(string name)
         {
             switch (name)
