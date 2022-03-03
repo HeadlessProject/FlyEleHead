@@ -7,8 +7,8 @@ namespace FlyElepHead
 {
     public partial class MainWindow : Form
     {
-        readonly Dictionary<string, Panel> scenes = new();
-        readonly Dictionary<string, Control> controllib = new();
+        Dictionary<string, Panel> scenes = new();
+        Dictionary<string, Control> controllib = new(); 
 
         public MainWindow()
         {
@@ -27,7 +27,14 @@ namespace FlyElepHead
 
             scenes["StartPanel"].Parent = this;
 
-            InitPanel("GamePanel");
+            (controllib["StartPanel_Button_StartGame"] as Button).Click += (_, _) =>
+            {
+                scenes["StartPanel"].Parent = null;
+
+                scenes["GamePanel"].Parent = this;
+
+                InitPanel("GamePanel");
+            };
 
         }
 
@@ -60,7 +67,7 @@ namespace FlyElepHead
                         X = (Width - label.PreferredSize.Width) / 2,
                         Y = (Height - label.PreferredSize.Height) / 2 - info.menu_label_title_vertical_offset
                     };
-                    Button button = new()
+                    Button button = new Button()
                     {
                         Text = "¿ªÊ¼ÓÎÏ·",
                         Size = new Size()
@@ -77,10 +84,29 @@ namespace FlyElepHead
                     };
                     controllib.Add("StartPanel_Label_Title", label);
                     controllib.Add("StartPanel_Button_StartGame", button);
+
                     break;
                 case "GamePanel":
                     Panel game_panel =scenes[name];
                     game_panel.Dock = DockStyle.Fill;
+
+
+                    Label Startlabel = new Label()
+                    {
+                        Text = info.game_panel_title,
+                        Parent = game_panel,
+                        Size = new Size()
+                        {
+                            Height = info.menu_label_title_height,
+                            Width = info.menu_label_title_width
+                        },
+                        Font = new Font("Consolas", info.menu_label_title_fontsize)
+                    };
+                    Startlabel.Location = new Point()
+                    {
+                        X = (Width - Startlabel.PreferredSize.Width) / 2,
+                        Y = (Height - Startlabel.PreferredSize.Height) / 2 - info.menu_label_title_vertical_offset
+                    };
 
                     break;
             }
