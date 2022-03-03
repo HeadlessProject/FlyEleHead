@@ -10,6 +10,8 @@ namespace FlyElepHead
         readonly public Dictionary<string, Panel> scenes = new();
         readonly public Dictionary<string, Control> controllib = new();
 
+        PictureBox TransparentParent = new();
+
         MainWindowHelper mwhelper;
         EEGG eEGG;
 
@@ -67,28 +69,6 @@ namespace FlyElepHead
                 case "StartPanel":
                     Panel panel = scenes[name];
                     panel.Dock = DockStyle.Fill;
-                    PictureBox start_back_picture = new()
-                    {
-                        Parent = panel,
-                        Image= new Bitmap(@"F:\all\项目\FlyElepHead\FlyEleHead\FlyElepHead\img\back1.png"),
-                        SizeMode=PictureBoxSizeMode.StretchImage
-                    };
-                    Label label = new()
-                    {
-                        Text = info.start_panel_title,
-                        Parent = panel,
-                        Size = new Size()
-                        {
-                            Width = info.menu_label_title_width,
-                            Height = info.menu_label_title_height
-                        },
-                        Font = new Font("Consolas", info.menu_label_title_fontsize)
-                    };
-                    label.Location = new Point()
-                    {
-                        X = (Width - label.PreferredSize.Width) / 2,
-                        Y = (Height - label.PreferredSize.Height) / 2 - info.menu_label_title_vertical_offset
-                    };
                     Button button = new()
                     {
                         Text = "开始游戏",
@@ -103,6 +83,30 @@ namespace FlyElepHead
                             Y = (Height - info.menu_btn_height) / 2 + 100
                         },
                         Parent = panel,
+                    };
+                    PictureBox start_back_picture = new()
+                    {
+                        Parent = panel,
+                        Image = new Bitmap($"{Environment.CurrentDirectory}\\img\\back1.png"),
+                        SizeMode = PictureBoxSizeMode.StretchImage,
+                        Dock = DockStyle.Fill,
+                    };
+                    Label label = new()
+                    {
+                        Text = info.start_panel_title,
+                        Parent = start_back_picture,
+                        Size = new Size()
+                        {
+                            Width = info.menu_label_title_width,
+                            Height = info.menu_label_title_height
+                        },
+                        Font = new Font("Consolas", info.menu_label_title_fontsize),
+                        BackColor = Color.Transparent
+                    };
+                    label.Location = new Point()
+                    {
+                        X = (Width - label.PreferredSize.Width) / 2,
+                        Y = (Height - label.PreferredSize.Height) / 2 - info.menu_label_title_vertical_offset
                     };
                     controllib.Add("StartPanel_Label_Title", label);
                     controllib.Add("StartPanel_Button_StartGame", button);
@@ -133,6 +137,7 @@ namespace FlyElepHead
                     break;
             }
         }
+
         void Gamerunning()
         {
 
