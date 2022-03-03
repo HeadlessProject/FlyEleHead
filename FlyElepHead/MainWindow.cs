@@ -90,7 +90,7 @@ namespace FlyElepHead
                     PictureBox start_back_picture = new()
                     {
                         Parent = panel,
-                        Image = new Bitmap($"{Environment.CurrentDirectory}\\img\\back1.png"),
+                        Image = new Bitmap($"{Environment.CurrentDirectory}\\img\\back2.png"),
                         SizeMode = PictureBoxSizeMode.StretchImage,
                         Dock = DockStyle.Fill,
                     };

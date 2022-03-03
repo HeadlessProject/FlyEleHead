@@ -137,6 +137,8 @@ namespace FlyElepHead
                 {
                     rgb_way = true;
                     ++rgb[index];
+                    if (index == 2) index = 0;
+                    else ++index;
                 }
                 else rgb[index] += rgb_way ? 1 : -1;
                 switch(target)
