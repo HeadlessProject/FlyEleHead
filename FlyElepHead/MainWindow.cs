@@ -39,6 +39,7 @@ namespace FlyElepHead
                 mwhelper.FadeOutIn("StartPanel", "GamePanel");
 
                 InitPanel("GamePanel");
+                
             };
         }
 
@@ -67,6 +68,12 @@ namespace FlyElepHead
                 case "StartPanel":
                     Panel panel = scenes[name];
                     panel.Dock = DockStyle.Fill;
+                    PictureBox start_back_picture = new()
+                    {
+                        Parent = panel,
+                        Image= new Bitmap(@"F:\all\ÏîÄ¿\FlyElepHead\FlyEleHead\FlyElepHead\img\back1.png"),
+                        SizeMode=PictureBoxSizeMode.StretchImage
+                    };
                     Label label = new()
                     {
                         Text = info.start_panel_title,
@@ -126,6 +133,10 @@ namespace FlyElepHead
 
                     break;
             }
+        }
+        void Gamerunning()
+        {
+
         }
     }
 }
