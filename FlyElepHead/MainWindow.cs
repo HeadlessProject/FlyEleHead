@@ -7,8 +7,8 @@ namespace FlyElepHead
 {
     public partial class MainWindow : Form
     {
-        Dictionary<string, Panel> scenes = new();
-        Dictionary<string, Control> controllib = new(); 
+        readonly Dictionary<string, Panel> scenes = new();
+        readonly Dictionary<string, Control> controllib = new(); 
 
         public MainWindow()
         {
@@ -67,7 +67,7 @@ namespace FlyElepHead
                         X = (Width - label.PreferredSize.Width) / 2,
                         Y = (Height - label.PreferredSize.Height) / 2 - info.menu_label_title_vertical_offset
                     };
-                    Button button = new Button()
+                    Button button = new()
                     {
                         Text = "¿ªÊ¼ÓÎÏ·",
                         Size = new Size()
@@ -91,7 +91,7 @@ namespace FlyElepHead
                     game_panel.Dock = DockStyle.Fill;
 
 
-                    Label Startlabel = new Label()
+                    Label Startlabel = new()
                     {
                         Text = info.game_panel_title,
                         Parent = game_panel,
