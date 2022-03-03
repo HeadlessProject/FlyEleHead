@@ -137,6 +137,10 @@ namespace FlyElepHead
         void Gamerunning()
         {
             Head head = new(this);
+            head.Move(new Point(){
+                X = (Width - head.head_box.PreferredSize.Width) / 2,
+                Y = (Height - head.head_box.PreferredSize.Height) / 2
+            });
         }
     }
 }
