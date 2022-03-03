@@ -1,5 +1,6 @@
 using info = FlyElepHead.GlobalInfo;
 using Timer = System.Windows.Forms.Timer;
+using FlyElepHead.Animals;
 
 #pragma warning disable IDE0079 // 请删除不必要的忽略
 #pragma warning disable CS8602 // 解引用可能出现空引用。
@@ -44,6 +45,7 @@ namespace FlyElepHead
                 mwhelper.FadeOutIn("StartPanel", "GamePanel");
                 OnPanelSwapped.Invoke();
                 InitPanel("GamePanel");
+                Gamerunning();
             };
         }
 
@@ -127,22 +129,6 @@ namespace FlyElepHead
                     game_panel.Dock = DockStyle.Fill;
 
 
-                    Label Startlabel = new()
-                    {
-                        Text = info.game_panel_title,
-                        Parent = game_panel,
-                        Size = new Size()
-                        {
-                            Height = info.menu_label_title_height,
-                            Width = info.menu_label_title_width
-                        },
-                        Font = new Font("Consolas", info.menu_label_title_fontsize)
-                    };
-                    Startlabel.Location = new Point()
-                    {
-                        X = (Width - Startlabel.PreferredSize.Width) / 2,
-                        Y = (Height - Startlabel.PreferredSize.Height) / 2 - info.menu_label_title_vertical_offset
-                    };
 
                     break;
             }
@@ -150,7 +136,7 @@ namespace FlyElepHead
 
         void Gamerunning()
         {
-
+            Head head = new(this);
         }
     }
 }
